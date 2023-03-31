@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", () => {
+
     const array_input = document.querySelectorAll(".input_form");
     const container_users_registred = document.querySelector(".container_users_registred");
     const btn_save_user = document.querySelector(".btn_save_user");
@@ -41,7 +42,6 @@ window.addEventListener("DOMContentLoaded", () => {
         array_local = JSON.parse(localStorage.getItem("users")) || [];
 
         const userFind = array_local.find((u) => array_input[2].value === u.document) || "";
-        console.log(userFind);
 
         if(userFind !== ""){
             alert("El documento ingresado ya existe");
@@ -58,7 +58,7 @@ window.addEventListener("DOMContentLoaded", () => {
                 array_local.unshift(object_info);
                 save_user_localstorage();
                 get_objects_localstorage(array_local);
-                console.log("local")
+                // console.log("local")
             } else {
                 array_users.unshift(object_info);
                 localStorage.setItem("users", JSON.stringify(array_users));
@@ -113,8 +113,6 @@ window.addEventListener("DOMContentLoaded", () => {
     };
 
     function delete_user(document_event) {
-
-        window.location.reload();
         
         let comfirm_delete = confirm("¿Seguro que desea eliminar el usuario?");
 
@@ -135,14 +133,13 @@ window.addEventListener("DOMContentLoaded", () => {
     function evenBtns() {
         const array_btn_update = [...document.querySelectorAll(".btn_update_user")];
         const array_btn_delete = [...document.querySelectorAll(".btn_delete_user")];
-        console.log(array_btn_delete)
+        // console.log(array_btn_delete)
 
         for (let i = 0; i < array_btn_delete.length; i++) {
             const btn = array_btn_delete[i];
             btn.addEventListener("click", (e) => {
                 const id = e.currentTarget.id;
                 delete_user(id)
-                console.log("delete");
             });
         }
         for (let i = 0; i < array_btn_update.length; i++) {
@@ -181,7 +178,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     btn_update.addEventListener("click", (e) => {
         e.preventDefault()
-        console.log(e.currentTarget.id)
+        // console.log(e.currentTarget.id)
         btn_update_user(parseInt(e.currentTarget.id))
         evenBtns();
     });
@@ -189,8 +186,6 @@ window.addEventListener("DOMContentLoaded", () => {
     function btn_update_user(indexObject) {
         if (changeBtn) {
             // array_local = JSON.parse(localStorage.getItem("users"));
-
-            console.log(indexObject);
 
             array_local[indexObject].name = array_input[0].value.toLowerCase().trim();
             array_local[indexObject].lastname = array_input[1].value.toLowerCase().trim();
@@ -217,13 +212,10 @@ window.addEventListener("DOMContentLoaded", () => {
 
     function search(word_filter) {
         // array_local = JSON.parse(localStorage.getItem("users"));
-        console.log(array_local);
-    
-        const array_filter = array_local.filter((u) => (u.name + " " + u.lastname).includes(word_filter))
-            // const fullname = u.name + " " + u.lastname;
-            // console.log(fullname)
-            // fullname.includes(word_filter)
-        // });
+
+        let word_filter_no_espaces = word_filter.replace(/ /g,"");
+        const array_filter = array_local.filter((u) => (u.name + u.lastname).replace(/ /g,"").includes(word_filter_no_espaces));
+
         console.log(array_filter)
         
         if(array_filter.length > 0){
