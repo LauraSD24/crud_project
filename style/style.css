@@ -54,6 +54,15 @@
     border: var(--border_color_white);
 }
 
+.container_btns_update{
+    display: flex;
+    justify-content: space-between;
+}
+
+.container_btns_update > button{
+    width: 48%;
+}
+
 .btn_ocult{
     display: none;
 }
@@ -63,6 +72,10 @@
     outline: none;
     padding-left: 5px;
 }
+
+/* .input_search{
+    width: 90%;
+} */
 
 .container_input > label{
     position: absolute;
@@ -93,6 +106,7 @@
     width: 65%;
     height: 85%;
     border-radius: var(--radius);
+    box-shadow: 1px 1px 8px 3px white;
 }
 
 .container_search{
@@ -104,8 +118,9 @@
 }
 
 .container_icon_search{
+    width: 40%;
     display: flex;
-    gap: 15px;
+    gap: 40px;
     align-items: center;
 }
 
@@ -120,11 +135,20 @@
     height: 85%;
     border-radius: var(--radius);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    /* flex-wrap: wrap; */
     gap: 10px;
     padding: 5px;
     overflow: auto;
 }
+
+.container_users_registred_not_found{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+}
+
 .container_users_registred > div{
     border-radius: var(--radius);
     height: 300px;
@@ -132,8 +156,8 @@
 
 .card{
     border: 2px solid #556f96;
-     display: flex;
-     position: relative;
+    display: flex;
+    position: relative;
     font-size: 15px;
     flex-direction: column;
     justify-content: space-between;
@@ -142,10 +166,11 @@
 }
 
 .btns_card{
+    /* border: var(--border); */
     display: flex;
     width: 95%;
     margin: 0px auto;
-    justify-content: space-between; 
+    justify-content: space-evenly; 
 }
 
 .icon_card{
@@ -157,7 +182,8 @@
 }
 
 .btn_user{
-    width: 70px;
+    /* border: var(--border); */
+    width: 40%;
     height: 30px;
     padding: 8px;
 }
@@ -171,4 +197,123 @@
 
 .card_data{
     text-align: center;
+}
+
+
+/* ----------- media querys ---------------- */
+
+@media(max-width: 1070px){
+    .container_users_registred{
+        grid-template-columns: repeat(2, 1fr);
+        /* padding: 20px; */
+        /* gap: 20px;  */
+    }
+    .container_form{
+        width: 30%;
+    }
+    .container_registers{
+        width: 60%;
+    }
+    .form{
+        width: 80%;
+    }
+}
+
+@media(max-width: 850px){
+    .title_users_registred{
+        font-size: 17px;
+    }
+    .container_icon_search{
+        width: 50%;
+        display: flex;
+        gap: 45px;
+        align-items: center;
+    }
+    .container_users_registred{
+        padding: 10px;
+        gap: 10px;
+    }
+    .card{
+        font-size: 13px;
+    }
+}
+
+@media(max-width: 750px){
+    .container_users_registred{
+        grid-template-columns: repeat(1, 1fr);
+        padding: 10px 30px;
+        gap: 10px;
+    }
+    .container_form{
+        width: 40%;
+    }
+    .container_registers{
+        width: 50%;
+    }
+    .container_icon_search{
+        width: 80%;
+        gap: 10px;
+    }
+    .container_search{
+        height: 80px;
+        gap: 10px;
+        flex-direction: column;
+        padding: 10px 0px;
+    }
+    .input_search{
+        height: 30px;
+    }
+}
+
+@media(max-width: 600px){
+    .container{
+        flex-direction: column;
+        height: max-content;
+        gap: 50px;
+    }
+    .container_form{
+        margin-top: 50px;
+        width: 80%;
+        padding: 20px 0px;
+    }
+    .container_registers{
+        margin-bottom: 50px;
+        width: 80%;
+    }
+    .form{
+        width: 70%;
+    }
+    .container_search{
+        height: 140px;
+        padding: 15px 0px;
+    } 
+    .input_search{
+        height: 40px;
+    }
+}
+
+@media(max-width: 550px){
+    .container_users_registred{
+        grid-template-columns: repeat(1, 1fr);
+        padding: 40px;
+        gap: 40px;
+    }
+}
+
+@media(max-width: 405px){
+    .container_users_registred{
+        padding: 30px;
+        gap: 30px;
+    }
+}
+
+@media(max-width: 375px){
+    .container_users_registred{
+        padding: 10px;
+        gap: 10px;
+    }
+    .container_icon_search{
+        width: 90%;
+        gap: 20px;
+    }
 }

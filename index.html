@@ -31,17 +31,21 @@
                 </div>
                 <div class="container_input container_email">
                     <label for="">Correo</label>
-                    <input type="gmail" class="input input_form email">
+                    <input type="email" class="input input_form email">
                 </div>
                 <button class="btn_save_user btn">Guardar</button>
-                <button class="btn_save_user btn btn_update btn_ocult">Actualizar</button>                
+                <div class="container_btns_update">
+                    <button class="btn_save_user btn btn_update btn_ocult">Actualizar</button>                
+                    <button class="btn_save_user btn btn_cancel_update btn_ocult">Cancelar</button>                
+                </div>
             </form>
         </div>
         <div class="container_registers">
             <div class="container_search">
                 <h3 class="title_users_registred">Usuarios registrados: <span class="number_users_registred"></span></h3>
                 <div class="container_icon_search">
-                    <input type="text" class="input input_search" placeholder="Buscar..."> <span><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <input type="text" class="input input_search" placeholder="Buscar..."> 
+                    <span><i class="fa-solid fa-trash" title="Eliminar Todo"></i></span>
                 </div>
             </div>
             <div class="container_users_registred">
