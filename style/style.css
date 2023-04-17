@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 :root{
     --border: 1px solid black;
     --radius: 5px;
@@ -166,7 +170,6 @@
 }
 
 .btns_card{
-    /* border: var(--border); */
     display: flex;
     width: 95%;
     margin: 0px auto;
@@ -198,6 +201,55 @@
 .card_data{
     text-align: center;
 }
+
+.container_modal{
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0000008c;
+    display: none;
+}
+
+.modal{
+    background-color: white;
+    width: 40%;
+    height: 50%;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    position: relative;
+}
+
+.container_btns_modal
+{
+    border: var(--border);
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn_modal{
+    border: var(--border);
+    width: 45%;
+    height: 30px;
+    border: 2px solid black;
+}
+
+.fa-circle-xmark{
+    color: black;
+    position: absolute;
+    top: -6px;
+    right: -6px;
+}
+
+
 
 
 /* ----------- media querys ---------------- */
