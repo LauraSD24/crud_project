@@ -1,6 +1,4 @@
 window.addEventListener("DOMContentLoaded", () => {
-  //sacar los valores unicos , ejemplo: [1,1,3,3,4,3,5,5] , resultado del ejemplo: [1,3,4,5]
-  //insomnia 
   const array_input = document.querySelectorAll(".input_form");
   const container_users_registred = document.querySelector(".container_users_registred");
   const btn_save_user = document.querySelector(".btn_save_user");
@@ -17,19 +15,11 @@ window.addEventListener("DOMContentLoaded", () => {
   const icon_close_modal = document.querySelector(".icon_close_modal");
   const container_btns_modal = document.querySelector(".container_btns_modal");
 
-  // console.log(form.getBoundingClientRect());
-  // window.addEventListener("scroll",(e)=>{
-  //   console.log(window.innerHeight);
-  //   console.log(window.visualViewport.pageTop);
-  // })
-  // console.log(window.innerWidth)
-
   let card_event;
   let changeBtn = false;
   let array_users = [];
   let array_local;
   let array_local_updated = JSON.parse(localStorage.getItem("users")) || [];
-  let accept_event = false;
 
   get_objects_localstorage(array_local_updated);
   evenBtns();
@@ -38,15 +28,12 @@ window.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     if (validate_form()) {
-      // alert("¡Campos vacíos! Complete toda la información");
       container_modal.style.display = "flex";
-      // create_btns_modal();
-      // const btn_accept_modal = document.querySelector(".btn_accept_modal");
       message_modal.innerText = "¡Campos vacíos! Complete toda la información";
-      // btn_accept_modal.addEventListener("click",()=>{
-      //   container_modal.style.display = "none";
-      // })
 
+      icon_close_modal.addEventListener("click", (e) => {
+        container_modal.style.display = "none";
+      });
     } else {
       create_user();
       evenBtns();
@@ -139,13 +126,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function delete_user(document_event) {
 
-    // let comfirm_delete = confirm("¿Seguro que desea eliminar el usuario?");
-    // container_modal.style.display = "flex";
-
-    // let confirm_delete = active_events_modal();
-    // console.log(confirm_delete)
-
-    // if (confirm_delete) {
     array_local = JSON.parse(localStorage.getItem("users"));
     for (let i = 0; i < array_local.length; i++) {
       if (array_local[i].document === document_event) {
@@ -156,8 +136,6 @@ window.addEventListener("DOMContentLoaded", () => {
     save_user_localstorage();
     get_objects_localstorage(array_local);
     evenBtns();
-    // accept_event = false;
-    // }
   };
 
   function create_btns_modal() {
@@ -237,7 +215,6 @@ window.addEventListener("DOMContentLoaded", () => {
   btn_update.addEventListener("click", (e) => {
     e.preventDefault()
     if (window.innerWidth <= 600) {
-      console.log(card_event);
       window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
     }
     btn_update_user(parseInt(e.currentTarget.id))
@@ -270,8 +247,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // @IsArray()
-  // const array=[];
   function search(word_filter) {
     // array_local = JSON.parse(localStorage.getItem("users"));
     // expresiones regulares
