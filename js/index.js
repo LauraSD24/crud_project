@@ -40,12 +40,12 @@ window.addEventListener("DOMContentLoaded", () => {
     if (validate_form()) {
       // alert("¡Campos vacíos! Complete toda la información");
       container_modal.style.display = "flex";
-      create_btns_modal();
-      const btn_accept_modal = document.querySelector(".btn_accept_modal");
+      // create_btns_modal();
+      // const btn_accept_modal = document.querySelector(".btn_accept_modal");
       message_modal.innerText = "¡Campos vacíos! Complete toda la información";
-      btn_accept_modal.addEventListener("click",()=>{
-        container_modal.style.display = "none";
-      })
+      // btn_accept_modal.addEventListener("click",()=>{
+      //   container_modal.style.display = "none";
+      // })
 
     } else {
       create_user();

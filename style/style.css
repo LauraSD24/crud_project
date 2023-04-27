@@ -84,12 +84,12 @@ html{
 .container_input > label{
     position: absolute;
     top: -10px;
-    z-index: 100;
+    /* z-index: 100; */
     left: 8px;
     padding: 0px 2px;
     border-radius: 3px;
     height: max-content;
-    width: 80px;
+    width: 85px;
     background-color: #ffffffda;
     color: #000000;
 }
@@ -212,6 +212,7 @@ html{
     align-items: center;
     background-color: #0000008c;
     display: none;
+    text-align: center;
 }
 
 .modal{
@@ -287,6 +288,9 @@ html{
     .card{
         font-size: 13px;
     }
+    .modal{
+        width: 60%;
+    }
 }
 
 @media(max-width: 750px){
@@ -348,6 +352,9 @@ html{
         grid-template-columns: repeat(1, 1fr);
         padding: 40px;
         gap: 40px;
+    }
+    .modal{
+        width: 80%;
     }
 }
 
