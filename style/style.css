@@ -227,17 +227,16 @@ html{
     position: relative;
 }
 
-.container_btns_modal
-{
-    border: var(--border);
-    width: 50%;
+.container_btns_modal{
+    /* border: 1px solid red; */
+    width: 60%;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
 }
 
 .btn_modal{
-    border: var(--border);
-    width: 45%;
+    width: 42%;
     height: 30px;
     border: 2px solid black;
 }

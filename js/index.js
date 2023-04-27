@@ -38,7 +38,15 @@ window.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     if (validate_form()) {
-      alert("¡Campos vacíos! Complete toda la información");
+      // alert("¡Campos vacíos! Complete toda la información");
+      container_modal.style.display = "flex";
+      create_btns_modal();
+      const btn_accept_modal = document.querySelector(".btn_accept_modal");
+      message_modal.innerText = "¡Campos vacíos! Complete toda la información";
+      btn_accept_modal.addEventListener("click",()=>{
+        container_modal.style.display = "none";
+      })
+
     } else {
       create_user();
       evenBtns();
@@ -156,10 +164,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
     container_btns_modal.innerHTML = "";
 
-    container_btns_modal.innerHTML = `<div class="container_btns_modal">
+    container_btns_modal.innerHTML = `
       <button class="btn btn_modal btn_accept_modal">Aceptar</button>
-      <button class="btn btn_modal btn_cancel_modal">Cancelar</button>
-      </div>`
+      <button class="btn btn_modal btn_cancel_modal">Cancelar</button>`
 
     const btn_cancel_modal = document.querySelector(".btn_cancel_modal");
 
@@ -169,7 +176,6 @@ window.addEventListener("DOMContentLoaded", () => {
     icon_close_modal.addEventListener("click", (e) => {
       container_modal.style.display = "none";
     })
-
   }
 
   function evenBtns() {
@@ -189,7 +195,6 @@ window.addEventListener("DOMContentLoaded", () => {
           delete_user(id);
           container_modal.style.display = "none";
         });
-
       });
     }
 
