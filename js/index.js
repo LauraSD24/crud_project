@@ -28,6 +28,7 @@ window.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     if (validate_form()) {
+      container_btns_modal.innerHTML = "";
       container_modal.style.display = "flex";
       message_modal.innerText = "¡Campos vacíos! Complete toda la información";
 
