@@ -183,6 +183,8 @@ window.addEventListener("DOMContentLoaded", () => {
         const id = e.currentTarget.id;
         card_event = e.path[2];
         // update_user(id);
+        form.style.backgroundColor = "red";
+
       });
     }
   }
@@ -215,7 +217,6 @@ window.addEventListener("DOMContentLoaded", () => {
 
   btn_update.addEventListener("click", (e) => {
     e.preventDefault()
-    form.style.backgroundColor = "red";
 
     // if (window.innerWidth <= 600) {
     //   window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
