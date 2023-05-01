@@ -189,9 +189,9 @@ window.addEventListener("DOMContentLoaded", () => {
 
   function update_user(document_event) {
 
-    if (window.innerWidth <= 600) {
-      window.scrollBy(0, -window.visualViewport.pageTop);
-    }
+    // if (window.innerWidth <= 600) {
+    //   window.scrollBy(0, -window.visualViewport.pageTop);
+    // }
 
     array_local = JSON.parse(localStorage.getItem("users"));
     container_registers.style.pointerEvents = "none";
