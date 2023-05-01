@@ -182,7 +182,7 @@ window.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", (e) => {
         const id = e.currentTarget.id;
         card_event = e.path[2];
-        update_user(id);
+        // update_user(id);
       });
     }
   }
@@ -211,16 +211,17 @@ window.addEventListener("DOMContentLoaded", () => {
     // btn_cancel_update.classList.remove("btn_ocult");
     // btn_update.setAttribute("id", indexObject);
     // return indexObject;
-    form.style.backgroundColor = "red";
   };
 
   btn_update.addEventListener("click", (e) => {
     e.preventDefault()
-    if (window.innerWidth <= 600) {
-      window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
-    }
-    btn_update_user(parseInt(e.currentTarget.id))
-    evenBtns();
+    form.style.backgroundColor = "red";
+
+    // if (window.innerWidth <= 600) {
+    //   window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
+    // }
+    // btn_update_user(parseInt(e.currentTarget.id))
+    // evenBtns();
   });
 
   function btn_update_user(indexObject) {
