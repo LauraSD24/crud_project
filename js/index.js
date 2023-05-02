@@ -181,8 +181,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const btn = array_btn_update[i];
       btn.addEventListener("click", (e) => {
         const id = e.currentTarget.id;
-        card_event = e;
-        console.log(e.target.parentElement.parentElement);
+        card_event = e.target.parentElement.parentElement;
         update_user(id);
       });
     }
@@ -217,9 +216,9 @@ window.addEventListener("DOMContentLoaded", () => {
   btn_update.addEventListener("click", (e) => {
     e.preventDefault()
 
-    // if (window.innerWidth <= 600) {
-    //   window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
-    // }
+    if (window.innerWidth <= 600) {
+      window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
+    }
     btn_update_user(parseInt(e.currentTarget.id))
     evenBtns();
   });

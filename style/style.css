@@ -77,10 +77,6 @@ html{
     padding-left: 5px;
 }
 
-/* .input_search{
-    width: 90%;
-} */
-
 .container_input > label{
     position: absolute;
     top: -10px;
@@ -90,8 +86,10 @@ html{
     border-radius: 3px;
     height: max-content;
     width: 85px;
+    /* width: max-content; */
     background-color: #ffffffda;
     color: #000000;
+    text-align: center;
 }
 
 .btn{
