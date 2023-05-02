@@ -181,7 +181,7 @@ window.addEventListener("DOMContentLoaded", () => {
       const btn = array_btn_update[i];
       btn.addEventListener("click", (e) => {
         const id = e.currentTarget.id;
-        card_event = e.path[2];
+        // card_event = e.path[2];
         update_user(id);
         // form.style.backgroundColor = "red";
       });
