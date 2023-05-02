@@ -213,6 +213,7 @@ html{
     background-color: #0000008c;
     display: none;
     text-align: center;
+    /* pointer-events: none; */
 }
 
 .modal{

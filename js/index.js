@@ -182,9 +182,8 @@ window.addEventListener("DOMContentLoaded", () => {
       btn.addEventListener("click", (e) => {
         const id = e.currentTarget.id;
         card_event = e.path[2];
-        // update_user(id);
-        form.style.backgroundColor = "red";
-
+        update_user(id);
+        // form.style.backgroundColor = "red";
       });
     }
   }
@@ -195,24 +194,24 @@ window.addEventListener("DOMContentLoaded", () => {
     //   window.scrollBy(0, -window.visualViewport.pageTop);
     // }
 
-    // array_local = JSON.parse(localStorage.getItem("users"));
-    // container_registers.style.pointerEvents = "none";
+    array_local = JSON.parse(localStorage.getItem("users"));
+    container_registers.style.pointerEvents = "none";
 
-    // const user = array_local.find((u) => document_event === u.document);
-    // const indexObject = array_local.indexOf(user)
-    // const array_user = [user.name, user.lastname, user.document, user.phone, user.email];
+    const user = array_local.find((u) => document_event === u.document);
+    const indexObject = array_local.indexOf(user)
+    const array_user = [user.name, user.lastname, user.document, user.phone, user.email];
 
-    // array_input.forEach((input, index) => {
-    //   input.value = array_user[index];
-    // });
-    // array_input[2].setAttribute("readOnly", "true");
-    // changeBtn = true;
+    array_input.forEach((input, index) => {
+      input.value = array_user[index];
+    });
+    array_input[2].setAttribute("readOnly", "true");
+    changeBtn = true;
 
-    // btn_save_user.classList.add("btn_ocult");
-    // btn_update.classList.remove("btn_ocult");
-    // btn_cancel_update.classList.remove("btn_ocult");
-    // btn_update.setAttribute("id", indexObject);
-    // return indexObject;
+    btn_save_user.classList.add("btn_ocult");
+    btn_update.classList.remove("btn_ocult");
+    btn_cancel_update.classList.remove("btn_ocult");
+    btn_update.setAttribute("id", indexObject);
+    return indexObject;
   };
 
   btn_update.addEventListener("click", (e) => {
@@ -221,8 +220,8 @@ window.addEventListener("DOMContentLoaded", () => {
     // if (window.innerWidth <= 600) {
     //   window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
     // }
-    // btn_update_user(parseInt(e.currentTarget.id))
-    // evenBtns();
+    btn_update_user(parseInt(e.currentTarget.id))
+    evenBtns();
   });
 
   function btn_update_user(indexObject) {
