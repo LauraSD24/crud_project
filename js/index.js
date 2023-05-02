@@ -181,18 +181,18 @@ window.addEventListener("DOMContentLoaded", () => {
       const btn = array_btn_update[i];
       btn.addEventListener("click", (e) => {
         const id = e.currentTarget.id;
-        // card_event = e.path[2];
+        card_event = e;
+        console.log(e.target.parentElement.parentElement);
         update_user(id);
-        // form.style.backgroundColor = "red";
       });
     }
   }
 
   function update_user(document_event) {
 
-    // if (window.innerWidth <= 600) {
-    //   window.scrollBy(0, -window.visualViewport.pageTop);
-    // }
+    if (window.innerWidth <= 600) {
+      window.scrollBy(0, -window.visualViewport.pageTop);
+    }
 
     array_local = JSON.parse(localStorage.getItem("users"));
     container_registers.style.pointerEvents = "none";
