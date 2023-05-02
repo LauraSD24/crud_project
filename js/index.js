@@ -7,10 +7,9 @@ window.addEventListener("DOMContentLoaded", () => {
   const form = document.querySelector(".form");
   const number_users_registred = document.querySelector(".number_users_registred");
   const input_search = document.querySelector(".input_search");
-  const icon_delete_all = document.querySelector(".fa-solid");
+  const icon_delete_all = document.querySelector(".icon_delete_all");
   const container_registers = document.querySelector(".container_registers");
   const container_modal = document.querySelector(".container_modal");
-  const modal = document.querySelector(".modal");
   const message_modal = document.querySelector(".message_modal");
   const icon_close_modal = document.querySelector(".icon_close_modal");
   const container_btns_modal = document.querySelector(".container_btns_modal");
@@ -250,8 +249,6 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 
   function search(word_filter) {
-    // array_local = JSON.parse(localStorage.getItem("users"));
-    // expresiones regulares
 
     let word_filter_no_espaces = word_filter.replace(/ /g, "");
     const array_filter = array_local.filter((u) => (u.name + u.lastname).replace(/ /g, "").includes(word_filter_no_espaces));

@@ -80,13 +80,11 @@ html{
 .container_input > label{
     position: absolute;
     top: -10px;
-    /* z-index: 100; */
     left: 8px;
     padding: 0px 2px;
     border-radius: 3px;
     height: max-content;
     width: 85px;
-    /* width: max-content; */
     background-color: #ffffffda;
     color: #000000;
     text-align: center;
@@ -126,7 +124,7 @@ html{
     align-items: center;
 }
 
-.fa-solid{
+.icon_delete_all,.icon_close_modal{
     font-size: 28px;
     text-align: center;
     color: white;
@@ -138,7 +136,6 @@ html{
     border-radius: var(--radius);
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    /* flex-wrap: wrap; */
     gap: 10px;
     padding: 5px;
     overflow: auto;
@@ -183,7 +180,6 @@ html{
 }
 
 .btn_user{
-    /* border: var(--border); */
     width: 40%;
     height: 30px;
     padding: 8px;
@@ -211,7 +207,6 @@ html{
     background-color: #0000008c;
     display: none;
     text-align: center;
-    /* pointer-events: none; */
 }
 
 .modal{
@@ -241,7 +236,7 @@ html{
     border: 2px solid black;
 }
 
-.fa-circle-xmark{
+.icon_close_modal{
     color: black;
     position: absolute;
     top: -6px;
@@ -253,8 +248,6 @@ html{
 @media(max-width: 1070px){
     .container_users_registred{
         grid-template-columns: repeat(2, 1fr);
-        /* padding: 20px; */
-        /* gap: 20px;  */
     }
     .container_form{
         width: 30%;
@@ -351,6 +344,12 @@ html{
     }
     .modal{
         width: 80%;
+    }
+    .container_input > label{
+        width: 100px;
+    }
+    .container_users_registred_not_found{
+        height: 300px;
     }
 }
 
