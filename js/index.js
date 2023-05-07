@@ -27,13 +27,7 @@ window.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     if (validate_form()) {
-      container_btns_modal.innerHTML = "";
-      container_modal.style.display = "flex";
-      message_modal.innerText = "¡Campos vacíos! Complete toda la información";
-
-      icon_close_modal.addEventListener("click", (e) => {
-        container_modal.style.display = "none";
-      });
+      show_message_modal("¡Campos vacíos! Complete toda la información");
     } else {
       create_user();
       evenBtns();
@@ -55,30 +49,33 @@ window.addEventListener("DOMContentLoaded", () => {
     array_local = JSON.parse(localStorage.getItem("users")) || [];
 
     const userFind = array_local.find((u) => array_input[2].value === u.document) || "";
+    let confirm_email = array_input[4].value.includes("@");
 
     if (userFind !== "") {
-      alert("El documento ingresado ya existe");
-    } else {
-      const object_info = {
-        name: `${array_input[0].value.toLowerCase().trim()}`,
-        lastname: `${array_input[1].value.toLowerCase().trim()}`,
-        document: `${array_input[2].value.trim()}`,
-        phone: `${array_input[3].value.trim()}`,
-        email: `${array_input[4].value.toLowerCase().trim()}`,
-      }
-
-      if (array_local.length > 0) {
-        array_local.unshift(object_info);
-        save_user_localstorage();
-        get_objects_localstorage(array_local);
-      } else {
-        array_users.unshift(object_info);
-        localStorage.setItem("users", JSON.stringify(array_users));
-        get_objects_localstorage(array_users);
-      }
-      form.reset();
+      show_message_modal("El documento ingresado ya existe");
+    } else if (confirm_email === false) {
+      show_message_modal("Falta el símbolo @ en el correo ingresado");
+    }else {
+    const object_info = {
+      name: `${array_input[0].value.toLowerCase().trim()}`,
+      lastname: `${array_input[1].value.toLowerCase().trim()}`,
+      document: `${array_input[2].value.trim()}`,
+      phone: `${array_input[3].value.trim()}`,
+      email: `${array_input[4].value.toLowerCase().trim()}`,
     }
+
+    if (array_local.length > 0) {
+      array_local.unshift(object_info);
+      save_user_localstorage();
+      get_objects_localstorage(array_local);
+    } else {
+      array_users.unshift(object_info);
+      localStorage.setItem("users", JSON.stringify(array_users));
+      get_objects_localstorage(array_users);
+    }
+    form.reset();
   }
+}
 
   function get_objects_localstorage(array) {
 
@@ -108,186 +105,198 @@ window.addEventListener("DOMContentLoaded", () => {
     return array_local;
   };
 
-  function validate_form() {
-    let campos_vacios = 0;
+function validate_form() {
+  let campos_vacios = 0;
 
-    for (let i = 0; i < array_input.length; i++) {
-      if (array_input[i].value === "") {
-        campos_vacios++;
-        break;
-      }
+  for (let i = 0; i < array_input.length; i++) {
+    if (array_input[i].value === "") {
+      campos_vacios++;
+      break;
     }
-    if (campos_vacios > 0) {
-      return true;
-    } else {
-      return false;
+  }
+  if (campos_vacios > 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+function delete_user(document_event) {
+
+  array_local = JSON.parse(localStorage.getItem("users"));
+  for (let i = 0; i < array_local.length; i++) {
+    if (array_local[i].document === document_event) {
+      array_local.splice(i, 1);
+      break;
     }
-  };
+  }
+  save_user_localstorage();
+  get_objects_localstorage(array_local);
+  evenBtns();
+};
 
-  function delete_user(document_event) {
+function create_btns_modal() {
 
-    array_local = JSON.parse(localStorage.getItem("users"));
-    for (let i = 0; i < array_local.length; i++) {
-      if (array_local[i].document === document_event) {
-        array_local.splice(i, 1);
-        break;
-      }
-    }
-    save_user_localstorage();
-    get_objects_localstorage(array_local);
-    evenBtns();
-  };
+  container_btns_modal.innerHTML = "";
 
-  function create_btns_modal() {
-
-    container_btns_modal.innerHTML = "";
-
-    container_btns_modal.innerHTML = `
+  container_btns_modal.innerHTML = `
       <button class="btn btn_modal btn_accept_modal">Aceptar</button>
       <button class="btn btn_modal btn_cancel_modal">Cancelar</button>`
 
-    const btn_cancel_modal = document.querySelector(".btn_cancel_modal");
+  const btn_cancel_modal = document.querySelector(".btn_cancel_modal");
 
-    btn_cancel_modal.addEventListener("click", (e) => {
-      container_modal.style.display = "none";
-    })
-    icon_close_modal.addEventListener("click", (e) => {
-      container_modal.style.display = "none";
-    })
-  }
-
-  function evenBtns() {
-    const array_btn_update = [...document.querySelectorAll(".btn_update_user")];
-    const array_btn_delete = [...document.querySelectorAll(".btn_delete_user")];
-
-    for (let i = 0; i < array_btn_delete.length; i++) {
-      const btn = array_btn_delete[i];
-      btn.addEventListener("click", (e) => {
-        const id = e.currentTarget.id;
-        container_modal.style.display = "flex";
-
-        create_btns_modal();
-        message_modal.textContent = "¿Está seguro de eliminar este usuario?";
-        const btn_accept_modal = document.querySelector(".btn_accept_modal");
-        btn_accept_modal.addEventListener("click", () => {
-          delete_user(id);
-          container_modal.style.display = "none";
-        });
-      });
-    }
-
-    for (let i = 0; i < array_btn_update.length; i++) {
-      const btn = array_btn_update[i];
-      btn.addEventListener("click", (e) => {
-        const id = e.currentTarget.id;
-        card_event = e.target.parentElement.parentElement;
-        update_user(id);
-      });
-    }
-  }
-
-  function update_user(document_event) {
-
-    if (window.innerWidth <= 600) {
-      window.scrollBy(0, -window.visualViewport.pageTop);
-    }
-
-    array_local = JSON.parse(localStorage.getItem("users"));
-    container_registers.style.pointerEvents = "none";
-
-    const user = array_local.find((u) => document_event === u.document);
-    const indexObject = array_local.indexOf(user)
-    const array_user = [user.name, user.lastname, user.document, user.phone, user.email];
-
-    array_input.forEach((input, index) => {
-      input.value = array_user[index];
-    });
-    array_input[2].setAttribute("readOnly", "true");
-    changeBtn = true;
-
-    btn_save_user.classList.add("btn_ocult");
-    btn_update.classList.remove("btn_ocult");
-    btn_cancel_update.classList.remove("btn_ocult");
-    btn_update.setAttribute("id", indexObject);
-    return indexObject;
-  };
-
-  btn_update.addEventListener("click", (e) => {
-    e.preventDefault()
-
-    if (window.innerWidth <= 600) {
-      window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
-    }
-    btn_update_user(parseInt(e.currentTarget.id))
-    evenBtns();
-  });
-
-  function btn_update_user(indexObject) {
-    if (changeBtn) {
-
-      array_local[indexObject].name = array_input[0].value.toLowerCase().trim();
-      array_local[indexObject].lastname = array_input[1].value.toLowerCase().trim();
-      array_local[indexObject].phone = array_input[3].value.trim();
-      array_local[indexObject].email = array_input[4].value.toLowerCase().trim();
-
-      if (validate_form()) {
-        alert("¡Campos vacíos! Complete toda la información")
-      } else {
-        save_user_localstorage();
-        get_objects_localstorage(array_local);
-        evenBtns();
-        form.reset();
-        btn_save_user.classList.remove("btn_ocult");
-        btn_update.classList.add("btn_ocult");
-        btn_cancel_update.classList.add("btn_ocult");
-        array_input[2].removeAttribute("readOnly");
-        container_registers.style.pointerEvents = "visible";
-        changeBtn = false;
-      }
-      evenBtns();
-    }
-  }
-
-  function search(word_filter) {
-
-    let word_filter_no_espaces = word_filter.replace(/ /g, "");
-    const array_filter = array_local.filter((u) => (u.name + u.lastname).replace(/ /g, "").includes(word_filter_no_espaces));
-
-    if (array_filter.length > 0) {
-      get_objects_localstorage(array_filter);
-      container_users_registred.classList.remove("container_users_registred_not_found");
-    } else {
-      container_users_registred.innerHTML = "No se encontraron registros";
-      container_users_registred.classList.add("container_users_registred_not_found");
-    }
-  }
-
-  input_search.addEventListener("input", (e) => {
-    e.preventDefault();
-    search(input_search.value.toLowerCase());
-    evenBtns();
+  btn_cancel_modal.addEventListener("click", (e) => {
+    container_modal.style.display = "none";
   })
+  icon_close_modal.addEventListener("click", (e) => {
+    container_modal.style.display = "none";
+  })
+}
 
-  function delete_all() {
-    // let verify = confirm("¿Está seguro de eliminar todos los usuarios?");
+function show_message_modal(message) {
+  container_btns_modal.innerText = "";
+  container_modal.style.display = "flex";
+  message_modal.innerHTML = message;
 
-    // if (verify) {
-    localStorage.removeItem("users");
-    array_local = JSON.parse(localStorage.getItem("users")) || [];
-    get_objects_localstorage(array_local);
-    // }
+  icon_close_modal.addEventListener("click", (e) => {
+    container_modal.style.display = "none";
+  });
+}
+
+function evenBtns() {
+  const array_btn_update = [...document.querySelectorAll(".btn_update_user")];
+  const array_btn_delete = [...document.querySelectorAll(".btn_delete_user")];
+
+  for (let i = 0; i < array_btn_delete.length; i++) {
+    const btn = array_btn_delete[i];
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.id;
+      container_modal.style.display = "flex";
+
+      create_btns_modal();
+      message_modal.textContent = "¿Está seguro de eliminar este usuario?";
+      const btn_accept_modal = document.querySelector(".btn_accept_modal");
+      btn_accept_modal.addEventListener("click", () => {
+        delete_user(id);
+        container_modal.style.display = "none";
+      });
+    });
   }
 
-  icon_delete_all.addEventListener("click", () => {
-    container_modal.style.display = "flex";
-
-    create_btns_modal();
-    message_modal.textContent = "¿Está seguro de eliminar todos los usuarios?";
-    const btn_accept_modal = document.querySelector(".btn_accept_modal");
-    btn_accept_modal.addEventListener("click", () => {
-      delete_all();
-      container_modal.style.display = "none";
+  for (let i = 0; i < array_btn_update.length; i++) {
+    const btn = array_btn_update[i];
+    btn.addEventListener("click", (e) => {
+      const id = e.currentTarget.id;
+      card_event = e.target.parentElement.parentElement;
+      update_user(id);
     });
+  }
+}
+
+function update_user(document_event) {
+
+  if (window.innerWidth <= 600) {
+    window.scrollBy(0, -window.visualViewport.pageTop);
+  }
+
+  array_local = JSON.parse(localStorage.getItem("users"));
+  container_registers.style.pointerEvents = "none";
+
+  const user = array_local.find((u) => document_event === u.document);
+  const indexObject = array_local.indexOf(user)
+  const array_user = [user.name, user.lastname, user.document, user.phone, user.email];
+
+  array_input.forEach((input, index) => {
+    input.value = array_user[index];
   });
+  array_input[2].setAttribute("readOnly", "true");
+  changeBtn = true;
+
+  btn_save_user.classList.add("btn_ocult");
+  btn_update.classList.remove("btn_ocult");
+  btn_cancel_update.classList.remove("btn_ocult");
+  btn_update.setAttribute("id", indexObject);
+  return indexObject;
+};
+
+btn_update.addEventListener("click", (e) => {
+  e.preventDefault()
+
+  if (window.innerWidth <= 600) {
+    window.scrollBy(0, card_event.getBoundingClientRect().top - 100);
+  }
+  btn_update_user(parseInt(e.currentTarget.id))
+  evenBtns();
+});
+
+function btn_update_user(indexObject) {
+  if (changeBtn) {
+
+    array_local[indexObject].name = array_input[0].value.toLowerCase().trim();
+    array_local[indexObject].lastname = array_input[1].value.toLowerCase().trim();
+    array_local[indexObject].phone = array_input[3].value.trim();
+    array_local[indexObject].email = array_input[4].value.toLowerCase().trim();
+
+    if (validate_form()) {
+      show_message_modal("¡Campos vacíos! Complete toda la información");
+    }else if(array_input[4].value.includes("@")===false){
+      show_message_modal("Falta el símbolo @ en el correo ingresado");
+    }else {
+      save_user_localstorage();
+      get_objects_localstorage(array_local);
+      evenBtns();
+      form.reset();
+      btn_save_user.classList.remove("btn_ocult");
+      btn_update.classList.add("btn_ocult");
+      btn_cancel_update.classList.add("btn_ocult");
+      array_input[2].removeAttribute("readOnly");
+      container_registers.style.pointerEvents = "visible";
+      changeBtn = false;
+    }
+    evenBtns();
+  }
+}
+
+function search(word_filter) {
+
+  let word_filter_no_espaces = word_filter.replace(/ /g, "");
+  const array_filter = array_local.filter((u) => (u.name + u.lastname).replace(/ /g, "").includes(word_filter_no_espaces));
+
+  if (array_filter.length > 0) {
+    get_objects_localstorage(array_filter);
+    container_users_registred.classList.remove("container_users_registred_not_found");
+  } else {
+    container_users_registred.innerHTML = "No se encontraron registros";
+    container_users_registred.classList.add("container_users_registred_not_found");
+  }
+}
+
+input_search.addEventListener("input", (e) => {
+  e.preventDefault();
+  search(input_search.value.toLowerCase());
+  evenBtns();
+})
+
+function delete_all() {
+  // let verify = confirm("¿Está seguro de eliminar todos los usuarios?");
+
+  // if (verify) {
+  localStorage.removeItem("users");
+  array_local = JSON.parse(localStorage.getItem("users")) || [];
+  get_objects_localstorage(array_local);
+  // }
+}
+
+icon_delete_all.addEventListener("click", () => {
+  container_modal.style.display = "flex";
+
+  create_btns_modal();
+  message_modal.textContent = "¿Está seguro de eliminar todos los usuarios?";
+  const btn_accept_modal = document.querySelector(".btn_accept_modal");
+  btn_accept_modal.addEventListener("click", () => {
+    delete_all();
+    container_modal.style.display = "none";
+  });
+});
 });
 
